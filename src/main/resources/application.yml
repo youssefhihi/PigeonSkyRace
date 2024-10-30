@@ -1,4 +1,6 @@
 spring:
   data:
     mongodb:
-        uri: mongodb://localhost:27017/PigeonSkyRace
+      uri: mongodb://db:27017/myapp
+      authentication-database: admin
+      auto-index-creation: true
