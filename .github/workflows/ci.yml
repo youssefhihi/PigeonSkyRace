@@ -2,9 +2,9 @@ name: Spring Boot CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 env:
   DOCKER_HUB_REPO: ${{ secrets.DOCKER_HUB_USERNAME }}/springboot-app
