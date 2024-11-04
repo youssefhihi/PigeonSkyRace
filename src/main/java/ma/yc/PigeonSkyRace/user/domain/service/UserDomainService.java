@@ -14,8 +14,6 @@ import ma.yc.PigeonSkyRace.user.domain.exception.UserRegistrationException;
 import ma.yc.PigeonSkyRace.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.awt.image.RasterFormatException;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
