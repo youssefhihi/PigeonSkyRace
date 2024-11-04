@@ -1,4 +1,4 @@
-package ma.yc.PigeonSkyRace.competition.domain.service.interfaces;
+package ma.yc.PigeonSkyRace.competition.domain.service;
 
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
