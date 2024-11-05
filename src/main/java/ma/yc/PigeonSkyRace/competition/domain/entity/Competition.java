@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.AdmissionPercentage;
-import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;

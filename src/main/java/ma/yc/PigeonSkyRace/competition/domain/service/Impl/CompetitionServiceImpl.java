@@ -2,7 +2,7 @@ package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
-import ma.yc.PigeonSkyRace.competition.domain.service.interfaces.CompetitionService;
+import ma.yc.PigeonSkyRace.competition.domain.service.CompetitionService;
 import ma.yc.PigeonSkyRace.competition.domain.repository.CompetitionRepository;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.CompetitionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
