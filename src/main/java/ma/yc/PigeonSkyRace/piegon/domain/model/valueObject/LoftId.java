@@ -14,4 +14,7 @@ public record LoftId(ObjectId value) {
         return value.toHexString();
     }
 
+    public static LoftId fromString ( String id ) {
+        return new LoftId(new ObjectId(id));
+    }
 }
