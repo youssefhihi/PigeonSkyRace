@@ -1,4 +1,4 @@
-package ma.yc.PigeonSkyRace.user.domain.valueObject;
+package ma.yc.PigeonSkyRace.user.domain.model.valueobject;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.bson.types.ObjectId;

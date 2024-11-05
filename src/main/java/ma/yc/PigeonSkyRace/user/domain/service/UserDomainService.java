@@ -7,14 +7,12 @@ import ma.yc.PigeonSkyRace.user.application.dto.request.LoginRequest;
 import ma.yc.PigeonSkyRace.user.application.dto.request.RegisterRequest;
 import ma.yc.PigeonSkyRace.user.application.dto.response.LoginResponse;
 import ma.yc.PigeonSkyRace.user.application.mapper.UserMapper;
-import ma.yc.PigeonSkyRace.user.domain.entity.User;
+import ma.yc.PigeonSkyRace.user.domain.model.aggregate.User;
 import ma.yc.PigeonSkyRace.user.domain.exception.InvalidCredentialsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserAlreadyExistsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserRegistrationException;
-import ma.yc.PigeonSkyRace.user.domain.repository.UserRepository;
+import ma.yc.PigeonSkyRace.user.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.awt.image.RasterFormatException;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +71,9 @@ public class UserDomainService {
 
         if (repository.existsByEmail(registerRequest.email())) {
             throw new UserAlreadyExistsException("Email already exists: " + registerRequest.email());
+        }
+        if (repository.existsByUserName(registerRequest.userName())) {
+            throw new UserAlreadyExistsException("Username already exists: " + registerRequest.userName());
         }
     }
 }

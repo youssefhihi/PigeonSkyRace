@@ -1,11 +1,12 @@
-package ma.yc.PigeonSkyRace.piegon.domain.entity;
+package ma.yc.PigeonSkyRace.piegon.domain.model.aggregate;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
-import ma.yc.PigeonSkyRace.piegon.domain.valueObject.Gender;
+import ma.yc.PigeonSkyRace.piegon.domain.model.entity.Loft;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.Gender;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
