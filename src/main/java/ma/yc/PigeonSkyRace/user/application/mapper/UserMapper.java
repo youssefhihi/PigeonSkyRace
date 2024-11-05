@@ -1,7 +1,7 @@
 package ma.yc.PigeonSkyRace.user.application.mapper;
 
 import ma.yc.PigeonSkyRace.user.application.dto.request.RegisterRequest;
-import ma.yc.PigeonSkyRace.user.domain.entity.User;
+import ma.yc.PigeonSkyRace.user.domain.model.aggregate.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

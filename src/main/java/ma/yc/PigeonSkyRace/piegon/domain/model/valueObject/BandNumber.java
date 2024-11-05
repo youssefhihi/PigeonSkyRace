@@ -1,4 +1,4 @@
-package ma.yc.PigeonSkyRace.piegon.domain.valueObject;
+package ma.yc.PigeonSkyRace.piegon.domain.model.valueObject;
 
 import jakarta.validation.constraints.NotBlank;
 

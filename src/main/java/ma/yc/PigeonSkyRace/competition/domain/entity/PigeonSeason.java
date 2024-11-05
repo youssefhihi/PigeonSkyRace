@@ -2,7 +2,7 @@ package ma.yc.PigeonSkyRace.competition.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import ma.yc.PigeonSkyRace.piegon.domain.entity.Pigeon;
+import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
