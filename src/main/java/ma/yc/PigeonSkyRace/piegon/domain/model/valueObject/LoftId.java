@@ -5,12 +5,12 @@ import org.bson.types.ObjectId;
 
 public record LoftId(ObjectId value) {
 
-    public LoftId(){
+    public LoftId () {
         this(new ObjectId());
     }
 
     @JsonValue
-    public String toHexString() {
+    public String toHexString () {
         return value.toHexString();
     }
 
