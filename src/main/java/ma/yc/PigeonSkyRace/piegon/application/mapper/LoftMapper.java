@@ -14,11 +14,11 @@ import org.mapstruct.Named;
 public interface LoftMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdDate", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "userId", source = "userId", qualifiedByName = "stringToUserId")
+    @Mapping(target = "user", source = "userId", qualifiedByName = "stringToUserId")
     Loft toEntity(LoftRequestDTO loftRequestDTO);
 
     @Mapping(source = "id", target = "id", qualifiedByName = "loftIdToString")
-    @Mapping(source = "userId", target = "userId", qualifiedByName = "userIdToString")
+    @Mapping(source = "user", target = "userId", qualifiedByName = "userIdToString")
     @Mapping(source = "createdDate", target = "createdDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     LoftResponseDTO toDto(Loft loft);
 

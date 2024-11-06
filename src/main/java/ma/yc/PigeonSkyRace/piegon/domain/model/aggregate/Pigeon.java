@@ -7,13 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 import ma.yc.PigeonSkyRace.piegon.domain.model.entity.Loft;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.Gender;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.PigeonId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ import java.util.UUID;
 public class Pigeon {
 
     @Id
-    private UUID id;
+    private PigeonId id;
 
     @NotBlank
     private String bandNumber;
@@ -35,9 +36,12 @@ public class Pigeon {
     @NotBlank
     private String color;
 
-    @DBRef
-    private Loft loft;
+    private LoftId loft;
 
     @CreatedDate
     private LocalDateTime createdDate;
+
+    public Pigeon () {
+        this.id = new PigeonId();
+    }
 }

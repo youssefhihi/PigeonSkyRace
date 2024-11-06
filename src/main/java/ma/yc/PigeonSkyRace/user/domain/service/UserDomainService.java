@@ -61,9 +61,6 @@ public class UserDomainService {
     }
 
 
-
-
-
     private void validateNewUser ( RegisterRequest registerRequest ) {
         if (registerRequest == null) {
             throw new UserRegistrationException("User data cannot be null");
