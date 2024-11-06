@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/lofts")
 @RequiredArgsConstructor
-public class LoftController {
+class LoftController {
 
     private final DefaultLoftDomainService service;
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<ResponseApi<LoftResponseDTO>> createLoft ( @Valid @RequestBody LoftRequestDTO loftRequest ) {
         LoftResponseDTO response = service.create(loftRequest);
         return ResponseEntity
