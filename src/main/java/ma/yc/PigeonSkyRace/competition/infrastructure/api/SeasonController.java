@@ -3,9 +3,13 @@ package ma.yc.PigeonSkyRace.competition.infrastructure.api;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.PigeonSkyRace.common.infrastructure.web.ApiResponse;
+import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonPigeonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonResponseDto;
+import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
+import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
+import ma.yc.PigeonSkyRace.competition.domain.service.SeasonPigeonService;
 import ma.yc.PigeonSkyRace.competition.domain.service.SeasonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +25,13 @@ import java.util.List;
 public class SeasonController {
 
     private final SeasonService seasonService;
+    private final SeasonPigeonApplicationService seasonPigeonService;
     private static final Logger logger = LoggerFactory.getLogger(SeasonController.class);
 
 
-    public SeasonController(SeasonService seasonService) {
+    public SeasonController(SeasonService seasonService, SeasonPigeonApplicationService seasonPigeonService) {
         this.seasonService = seasonService;
+        this.seasonPigeonService = seasonPigeonService;
     }
 
 
@@ -58,6 +64,13 @@ public class SeasonController {
         seasonService.deleteSeason(SeasonId.fromString(id));
         return new ResponseEntity<>("Season Deleted Successfully", HttpStatus.OK);
     }
+
+//    @PostMapping("/register/{seasonId}")
+//    public ResponseEntity<String> registerSeason(@Valid @PathVariable String seasonId,@Valid @RequestAttribute String pigeonId) {
+//        SeasonResponseDto season = seasonService.getSeasonById(SeasonId.fromString(seasonId));
+//
+//
+//    }
 
 
 }

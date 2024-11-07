@@ -16,4 +16,5 @@ public interface CompetitionMapper {
     Competition toEntity (CompetitionRequestDto dto );
 
     CompetitionResponseDto toDto (Competition entity );
+    Competition toEntity (CompetitionResponseDto competitionResponseDto);
 }

@@ -58,7 +58,7 @@ class CompetitionServiceImplTest {
         AdmissionPercentage num = new AdmissionPercentage(12.3);
         competitionRequestDto = new CompetitionRequestDto("Spring Competition", "A fun competition", 100, num, LocalDateTime.now(), LocalDateTime.now(), seasonId);
         coordinate = new Coordinate(35.68, 139.69);
-        competitionResponseDto = new CompetitionResponseDto(competitionId, "Spring Competition", "A fun competition", coordinate, 100, num, LocalDateTime.now(), LocalDateTime.now(), null);
+        competitionResponseDto = new CompetitionResponseDto(competitionId, "Spring Competition", "A fun competition", coordinate, 100, num,seasonId, LocalDateTime.now(), LocalDateTime.now(), null);
     }
 
     @Test

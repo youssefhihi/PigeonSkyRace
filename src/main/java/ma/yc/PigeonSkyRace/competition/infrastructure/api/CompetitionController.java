@@ -4,9 +4,14 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.PigeonSkyRace.common.infrastructure.web.ApiResponse;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
+import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonPigeonRequestDto;
+import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
+import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonPigeonId;
+import ma.yc.PigeonSkyRace.competition.domain.service.CompetitionPigeonService;
 import ma.yc.PigeonSkyRace.competition.domain.service.CompetitionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +30,7 @@ public class CompetitionController {
     private static final Logger logger = LoggerFactory.getLogger(CompetitionController.class);
 
 
-    public CompetitionController(CompetitionService competitionService) {
+    public CompetitionController(CompetitionService competitionService, CompetitionPigeonService competitionPigeonService) {
         this.competitionService = competitionService;
     }
 
