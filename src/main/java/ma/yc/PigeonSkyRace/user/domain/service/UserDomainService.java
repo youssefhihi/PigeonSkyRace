@@ -7,10 +7,10 @@ import ma.yc.PigeonSkyRace.user.application.dto.request.LoginRequest;
 import ma.yc.PigeonSkyRace.user.application.dto.request.RegisterRequest;
 import ma.yc.PigeonSkyRace.user.application.dto.response.LoginResponse;
 import ma.yc.PigeonSkyRace.user.application.mapper.UserMapper;
-import ma.yc.PigeonSkyRace.user.domain.model.aggregate.User;
 import ma.yc.PigeonSkyRace.user.domain.exception.InvalidCredentialsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserAlreadyExistsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserRegistrationException;
+import ma.yc.PigeonSkyRace.user.domain.model.aggregate.User;
 import ma.yc.PigeonSkyRace.user.infrastructure.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -44,24 +44,15 @@ public class UserDomainService {
         }
     }
 
-    public LoginResponse login(LoginRequest loginRequest) {
-        User user = repository.findUserByEmail(loginRequest.email())
-                .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
+    public LoginResponse login ( LoginRequest loginRequest ) {
+        User user = repository.findUserByEmail(loginRequest.email()).orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
 
         if (!passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
             throw new InvalidCredentialsException("Invalid email or password");
         }
 
-        return new LoginResponse(
-                user.getEmail(),
-                user.getUserName(),
-                user.getRole(),
-                "Login successful"
-        );
+        return new LoginResponse(user.getEmail(), user.getUserName(), user.getRole(), "Login successful");
     }
-
-
-
 
 
     private void validateNewUser ( RegisterRequest registerRequest ) {

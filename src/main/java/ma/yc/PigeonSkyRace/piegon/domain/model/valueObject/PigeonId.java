@@ -3,9 +3,8 @@ package ma.yc.PigeonSkyRace.piegon.domain.model.valueObject;
 import com.fasterxml.jackson.annotation.JsonValue;
 import org.bson.types.ObjectId;
 
-public record LoftId(ObjectId value) {
-
-    public LoftId () {
+public record PigeonId(ObjectId value) {
+    public PigeonId () {
         this(new ObjectId());
     }
 
@@ -14,7 +13,7 @@ public record LoftId(ObjectId value) {
         return value.toHexString();
     }
 
-    public static LoftId fromString ( String id ) {
-        return new LoftId(new ObjectId(id));
+    public static PigeonId fromString ( String id ) {
+        return new PigeonId(new ObjectId(id));
     }
 }

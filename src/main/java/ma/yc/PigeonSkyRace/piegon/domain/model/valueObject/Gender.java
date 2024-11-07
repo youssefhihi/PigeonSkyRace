@@ -1,13 +1,27 @@
 package ma.yc.PigeonSkyRace.piegon.domain.model.valueObject;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
-public record Gender(
-        @NotNull @NotBlank String gender) {
+public record Gender(@NotBlank String value) {
     public Gender {
-        if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
+        validate(value);
+    }
+
+    private static void validate ( String value ) {
+        if (!value.equalsIgnoreCase("male") && !value.equalsIgnoreCase("female")) {
             throw new IllegalArgumentException("The gender must be either 'male' or 'female'.");
         }
+    }
+
+    @JsonCreator
+    public static Gender fromString ( String value ) {
+        return new Gender(value);
+    }
+
+    @JsonValue
+    public String getValue () {
+        return value;
     }
 }
