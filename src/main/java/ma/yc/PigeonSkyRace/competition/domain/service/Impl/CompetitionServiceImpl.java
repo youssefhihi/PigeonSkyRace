@@ -7,16 +7,14 @@ import ma.yc.PigeonSkyRace.competition.application.events.CompetitionCreatedEven
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
-import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
 import ma.yc.PigeonSkyRace.competition.domain.service.CompetitionService;
-import ma.yc.PigeonSkyRace.competition.domain.repository.CompetitionRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.CompetitionRepository;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.CompetitionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service

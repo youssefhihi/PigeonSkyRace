@@ -6,7 +6,7 @@ import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonPigeonResp
 import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
-import ma.yc.PigeonSkyRace.competition.domain.repository.SeasonPigeonRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.SeasonPigeonRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.SeasonPigeonService;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.SeasonPigeonMapper;
 import org.springframework.stereotype.Service;

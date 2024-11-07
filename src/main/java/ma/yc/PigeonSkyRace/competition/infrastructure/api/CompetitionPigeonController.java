@@ -2,6 +2,7 @@ package ma.yc.PigeonSkyRace.competition.infrastructure.api;
 
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.PigeonSkyRace.common.infrastructure.web.ApiResponse;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionPigeonRequestDto;
@@ -26,30 +27,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/competition/register")
 @Slf4j
+@RequiredArgsConstructor
 public class CompetitionPigeonController {
 
-    private final CompetitionPigeonService competitionPigeonService;
+    private final CompetitionPigeonService service;
     private final SeasonPigeonService seasonPigeonService;
     private final CompetitionService competitionService;
     private final CompetitionMapper competitionMapper;
     private final SeasonPigeonMapper seasonPigeonMapper;
     private static final Logger logger = LoggerFactory.getLogger(CompetitionController.class);
 
-
-    public CompetitionPigeonController(
-
-            CompetitionPigeonService competitionPigeonService,
-            CompetitionService competitionService,
-            CompetitionMapper competitionMapper,
-            SeasonPigeonService seasonPigeonService,
-            SeasonPigeonMapper seasonPigeonMapper) {
-
-        this.competitionPigeonService = competitionPigeonService;
-        this.competitionService = competitionService;
-        this.competitionMapper = competitionMapper;
-        this.seasonPigeonService = seasonPigeonService;
-        this.seasonPigeonMapper = seasonPigeonMapper;
-    }
 
     @PostMapping("/{competitionId}")
     public ResponseEntity<ApiResponse<CompetitionPigeonResponseDto>> registerToCompetition(
@@ -59,7 +46,7 @@ public class CompetitionPigeonController {
         Competition competition = competitionMapper.toEntity(competitionService.getCompetition(CompetitionId.fromString(competitionId)));
         SeasonPigeon seasonPigeon = seasonPigeonMapper.toEntity(seasonPigeonService.getSeasonById(SeasonPigeonId.fromString(seasonPigeonId)));
 
-        CompetitionPigeonResponseDto responseDto = competitionPigeonService.registerToCompetition(seasonPigeon, competition);
+        CompetitionPigeonResponseDto responseDto = service.registerToCompetition(seasonPigeon, competition);
 
         ApiResponse<CompetitionPigeonResponseDto> response = new ApiResponse<>(
                 responseDto,

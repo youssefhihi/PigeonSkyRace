@@ -2,7 +2,6 @@ package ma.yc.PigeonSkyRace.competition.domain.entity;
 
 
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
-import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;

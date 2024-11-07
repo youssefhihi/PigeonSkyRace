@@ -7,7 +7,7 @@ import ma.yc.PigeonSkyRace.competition.application.events.CompetitionCreatedEven
 import ma.yc.PigeonSkyRace.competition.domain.service.SeasonService;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
-import ma.yc.PigeonSkyRace.competition.domain.repository.SeasonRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.SeasonRepository;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.SeasonMapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

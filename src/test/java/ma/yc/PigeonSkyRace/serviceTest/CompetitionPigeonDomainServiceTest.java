@@ -9,7 +9,7 @@ import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
-import ma.yc.PigeonSkyRace.competition.domain.repository.CompetitionPigeonRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.CompetitionPigeonRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.Impl.CompetitionPigeonDomainService;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.CompetitionPigeonMapper;
 import org.junit.jupiter.api.BeforeEach;

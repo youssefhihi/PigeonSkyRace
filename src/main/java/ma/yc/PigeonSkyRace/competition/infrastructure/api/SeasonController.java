@@ -65,12 +65,7 @@ public class SeasonController {
         return new ResponseEntity<>("Season Deleted Successfully", HttpStatus.OK);
     }
 
-//    @PostMapping("/register/{seasonId}")
-//    public ResponseEntity<String> registerSeason(@Valid @PathVariable String seasonId,@Valid @RequestAttribute String pigeonId) {
-//        SeasonResponseDto season = seasonService.getSeasonById(SeasonId.fromString(seasonId));
-//
-//
-//    }
+
 
 
 }
