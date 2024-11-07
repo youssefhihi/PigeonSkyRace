@@ -5,13 +5,15 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.AdmissionPercentage;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -19,7 +21,7 @@ import java.util.UUID;
 public class Competition {
 
     @Id
-    private UUID id;
+    private CompetitionId id;
 
     @NotBlank
     private String name;
@@ -44,9 +46,14 @@ public class Competition {
     @Field("date_end")
     private LocalDateTime dateEnd;
 
+    @NotNull
+    private SeasonId seasonId;
+
     @CreatedDate
     private LocalDateTime createdDate;
 
-
+    public Competition(){
+        this.id = new CompetitionId();
+    }
 
 }
