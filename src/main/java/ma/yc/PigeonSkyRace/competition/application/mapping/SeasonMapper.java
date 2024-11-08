@@ -13,4 +13,6 @@ public interface SeasonMapper {
     Season toEntity ( SeasonRequestDto dto );
 
     SeasonResponseDto toDto ( Season entity );
+
+    Season toEntity(SeasonResponseDto dto);
 }

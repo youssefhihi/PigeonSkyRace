@@ -3,18 +3,17 @@ package ma.yc.PigeonSkyRace.serviceTest;
 import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonResponseDto;
+import ma.yc.PigeonSkyRace.competition.application.mapping.SeasonMapper;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
-import ma.yc.PigeonSkyRace.competition.domain.repository.SeasonRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.SeasonRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.Impl.SeasonServiceImpl;
-import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.SeasonMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

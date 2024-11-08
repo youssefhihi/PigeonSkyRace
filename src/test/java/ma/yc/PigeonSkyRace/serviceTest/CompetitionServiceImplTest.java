@@ -4,14 +4,14 @@ import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.events.CompetitionCreatedEvent;
+import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionMapper;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.AdmissionPercentage;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
-import ma.yc.PigeonSkyRace.competition.domain.repository.CompetitionRepository;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.CompetitionRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.Impl.CompetitionServiceImpl;
-import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.CompetitionMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -58,7 +58,7 @@ class CompetitionServiceImplTest {
         AdmissionPercentage num = new AdmissionPercentage(12.3);
         competitionRequestDto = new CompetitionRequestDto("Spring Competition", "A fun competition", 100, num, LocalDateTime.now(), LocalDateTime.now(), seasonId);
         coordinate = new Coordinate(35.68, 139.69);
-        competitionResponseDto = new CompetitionResponseDto(competitionId, "Spring Competition", "A fun competition", coordinate, 100, num, LocalDateTime.now(), LocalDateTime.now(), null);
+        competitionResponseDto = new CompetitionResponseDto(competitionId, "Spring Competition", "A fun competition", coordinate, 100, num,seasonId, LocalDateTime.now(), LocalDateTime.now(), null);
     }
 
     @Test

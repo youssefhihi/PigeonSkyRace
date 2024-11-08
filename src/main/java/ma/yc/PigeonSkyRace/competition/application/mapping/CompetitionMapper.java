@@ -1,11 +1,7 @@
 package ma.yc.PigeonSkyRace.competition.application.mapping;
 
-import ma.yc.PigeonSkyRace.common.infrastructure.mapper.GenericMapper;
-import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
-import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
-import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,4 +12,5 @@ public interface CompetitionMapper {
     Competition toEntity (CompetitionRequestDto dto );
 
     CompetitionResponseDto toDto (Competition entity );
+    Competition toEntity (CompetitionResponseDto competitionResponseDto);
 }
