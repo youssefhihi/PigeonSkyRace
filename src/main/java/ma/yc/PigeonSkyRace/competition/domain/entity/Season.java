@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -33,14 +32,16 @@ public class Season {
     @Field(name = "is_active")
     private Boolean isActive;
 
+    @DBRef
+    private List<SeasonPigeon> seasonPigeons = new ArrayList<>();
 
     @DBRef
-    private List<Competition> competitions = new ArrayList<>();;
+    private List<Competition> competitions = new ArrayList<>();
 
     @CreatedDate
     private LocalDateTime createdDate;
 
-    public Season() {
+    public Season () {
         this.id = new SeasonId();
     }
 }

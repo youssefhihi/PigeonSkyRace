@@ -1,4 +1,4 @@
-package ma.yc.PigeonSkyRace.competition.domain.repository;
+package ma.yc.PigeonSkyRace.competition.infrastructure.repository;
 
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
