@@ -4,14 +4,13 @@ import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonPigeonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicationService;
+import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
 import ma.yc.PigeonSkyRace.competition.infrastructure.repository.SeasonPigeonRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.SeasonPigeonService;
 import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.SeasonPigeonMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class SeasonPigeonDomainService implements SeasonPigeonService, SeasonPigeonApplicationService {
@@ -25,13 +24,9 @@ public class SeasonPigeonDomainService implements SeasonPigeonService, SeasonPig
 
     @Override
     public SeasonPigeonResponseDto RegisterToSeason(SeasonPigeonRequestDto seasonPigeonRequestDto) {
-        Optional<SeasonPigeon> existingRegistration = repository.findByPigeonAndSeason(
+        repository.findByPigeonAndSeason(
                 seasonPigeonRequestDto.pigeon(), seasonPigeonRequestDto.season()
-        );
-
-        if (existingRegistration.isPresent()) {
-            throw new IllegalArgumentException("This pigeon is already registered in the season.");
-        }
+        ).orElseThrow(() -> new FailedToRegister("This pigeon is already registered in the season."));
 
         SeasonPigeon savedSeasonPigeon = repository.save(mapper.toEntity(seasonPigeonRequestDto));
 
