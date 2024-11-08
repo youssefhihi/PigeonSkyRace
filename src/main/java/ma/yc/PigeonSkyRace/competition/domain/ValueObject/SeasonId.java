@@ -5,7 +5,7 @@ import org.bson.types.ObjectId;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public record SeasonId(ObjectId value) {
-     public SeasonId() {
+    public SeasonId () {
         this(new ObjectId());
     }
 

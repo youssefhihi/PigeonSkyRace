@@ -1,4 +1,4 @@
-package ma.yc.PigeonSkyRace.competition.infrastructure.mapping;
+package ma.yc.PigeonSkyRace.competition.application.mapping;
 
 import ma.yc.PigeonSkyRace.common.infrastructure.mapper.GenericMapper;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
