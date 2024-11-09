@@ -1,5 +1,6 @@
 package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
+import lombok.RequiredArgsConstructor;
 import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
@@ -18,20 +19,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CompetitionServiceImpl implements CompetitionService {
 
     private final CompetitionRepository repository;
     private final CompetitionMapper mapper;
     private final ApplicationEventPublisher eventPublisher;
 
-
-
-    @Autowired
-    public CompetitionServiceImpl(CompetitionRepository repository, CompetitionMapper mapper, ApplicationEventPublisher eventPublisher) {
-        this.repository = repository;
-        this.mapper = mapper;
-        this.eventPublisher = eventPublisher;
-    }
 
     @Override
     public CompetitionResponseDto createCompetition(CompetitionRequestDto competitionRequestDto) {

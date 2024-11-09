@@ -1,6 +1,7 @@
 package ma.yc.PigeonSkyRace.competition.api;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.PigeonSkyRace.common.infrastructure.web.ApiResponse;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
@@ -19,16 +20,10 @@ import java.util.List;
 @RequestMapping("/api/v1/competition")
 @Slf4j
 @Validated
+@RequiredArgsConstructor
 class CompetitionController {
 
     private final CompetitionService competitionService;
-    private static final Logger logger = LoggerFactory.getLogger(CompetitionController.class);
-
-
-    public CompetitionController ( CompetitionService competitionService ) {
-        this.competitionService = competitionService;
-    }
-
 
     @PostMapping
     public ResponseEntity<ApiResponse<CompetitionResponseDto>> createCompetition ( @Valid @RequestBody CompetitionRequestDto competition ) {

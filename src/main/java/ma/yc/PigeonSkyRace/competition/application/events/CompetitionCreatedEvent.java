@@ -1,8 +1,10 @@
 package ma.yc.PigeonSkyRace.competition.application.events;
 
+import lombok.Getter;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 
+@Getter
 public class CompetitionCreatedEvent {
     private final Competition competition;
     private final SeasonId seasonId;
@@ -12,11 +14,4 @@ public class CompetitionCreatedEvent {
         this.seasonId = seasonId;
     }
 
-    public Competition getCompetition() {
-        return competition;
-    }
-
-    public SeasonId getSeasonId() {
-        return seasonId;
-    }
 }

@@ -1,5 +1,6 @@
 package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
+import lombok.RequiredArgsConstructor;
 import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonResponseDto;
@@ -17,15 +18,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class SeasonServiceImpl implements SeasonService, SeasonApplicationService {
 
     private final SeasonRepository repository;
     private final SeasonMapper mapper;
-
-    public SeasonServiceImpl ( SeasonRepository repository, SeasonMapper mapper ) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @EventListener
     public void handleCompetitionCreatedEvent ( CompetitionCreatedEvent event ) {

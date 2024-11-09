@@ -14,6 +14,7 @@ public record CompetitionResponseDto(
         String description,
         Coordinate coordinate,
         Integer maxPigeons,
+        Double distance,
         AdmissionPercentage admissionPercentage,
         SeasonId seasonId,
         LocalDateTime dateStart,

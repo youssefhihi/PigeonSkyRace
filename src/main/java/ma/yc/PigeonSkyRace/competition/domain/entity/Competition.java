@@ -32,6 +32,9 @@ public class Competition {
     @NotNull
     private Coordinate coordinate;
 
+    @Positive
+    private Double distance;
+
     @Field("max_pigeons")
     @Positive
     private Integer maxPigeons;

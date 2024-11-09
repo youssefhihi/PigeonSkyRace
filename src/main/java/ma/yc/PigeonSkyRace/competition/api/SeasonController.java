@@ -1,6 +1,7 @@
 package ma.yc.PigeonSkyRace.competition.api;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.PigeonSkyRace.common.infrastructure.web.ApiResponse;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonRequestDto;
@@ -20,22 +21,13 @@ import java.util.List;
 @RequestMapping("/api/v1/season")
 @Slf4j
 @Validated
+@RequiredArgsConstructor
 class SeasonController {
 
     private final SeasonService seasonService;
-    private static final Logger logger = LoggerFactory.getLogger(SeasonController.class);
-
-
-    public SeasonController ( SeasonService seasonService ) {
-        this.seasonService = seasonService;
-    }
-
-
     @PostMapping
     public ResponseEntity<ApiResponse<SeasonResponseDto>> createSeason ( @Valid @RequestBody SeasonRequestDto season ) {
         SeasonResponseDto createdSeason = seasonService.createSeason(season);
-        logger.info("Starting createSeason with data: {}", createdSeason);
-
         ApiResponse<SeasonResponseDto> response = new ApiResponse<>(createdSeason, "Season created successfully", HttpStatus.CREATED);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

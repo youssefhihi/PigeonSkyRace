@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public record CompetitionPigeonResponseDto(
         CompetitionPigeonId id,
-        SeasonPigeon pigeon,
+        SeasonPigeon seasonPigeon,
         Competition competition,
         LocalDateTime createdDate
 ) {
