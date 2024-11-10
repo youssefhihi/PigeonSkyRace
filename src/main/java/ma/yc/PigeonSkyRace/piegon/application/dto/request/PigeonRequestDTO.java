@@ -6,15 +6,14 @@ import jakarta.validation.constraints.Positive;
 import ma.yc.PigeonSkyRace.piegon.domain.model.enums.Gender;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.BandNumber;
 
-public record PigeonRequestDTO(@NotNull BandNumber bandNumber,
+public record PigeonRequestDTO(
+        @NotNull BandNumber bandNumber,
 
-                               @NotNull Gender gender,
+        @NotNull Gender gender,
 
-                               @Positive double age,
+        @Positive double age,
 
-                               @NotBlank String color,
+        @NotBlank String color,
 
-                               @NotBlank String loftId
-
-) {
+        @NotBlank String loftId) {
 }

@@ -56,6 +56,8 @@ class CompetitionPigeonDomainServiceTest {
         competition = new Competition();
         competition.setId(new CompetitionId());
         competition.setSeasonId(seasonId);
+        competition.setDateStart(LocalDateTime.now());
+        competition.setDateEnd(LocalDateTime.now().plusDays(1));
 
         competitionPigeon = new CompetitionPigeon();
         requestDto = new CompetitionPigeonRequestDto(seasonPigeon, competition);

@@ -16,6 +16,8 @@ import ma.yc.PigeonSkyRace.piegon.domain.service.PigeonDomainService;
 import ma.yc.PigeonSkyRace.piegon.infrastructure.repository.PigeonRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -34,7 +36,25 @@ public class DefaultPigeonDomainService implements PigeonDomainService, PigeonAp
     }
 
     @Override
-    public Pigeon findPigeonById ( PigeonId value ) {
-        return repository.findById(value).orElseThrow(() -> new NotFoundException("pigeon", value));
+    public List<PigeonResponseDTO> findAll () {
+        return repository
+                .findAll()
+                .stream()
+                .map(mapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public PigeonResponseDTO getSeasonById(PigeonId id) {
+        return repository.findById(id)
+                .map(mapper::toDto)
+                .orElseThrow(() -> new NotFoundException("pigeon", id));
+    }
+
+    @Override
+    public Pigeon findPigeonById ( PigeonId id ) {
+        return repository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("pigeon", id));
     }
 }

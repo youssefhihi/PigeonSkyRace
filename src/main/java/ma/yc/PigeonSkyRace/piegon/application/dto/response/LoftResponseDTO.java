@@ -7,6 +7,5 @@ public record LoftResponseDTO(
         String name,
         CoordinateRequestDTO coordinate,
         String userId,
-        String createdDate
-) {
+        String createdDate) {
 }
