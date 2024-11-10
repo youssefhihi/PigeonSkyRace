@@ -8,12 +8,12 @@ public record UserId(ObjectId value) {
         this(new ObjectId());
     }
 
+    public static UserId fromString ( String id ) {
+        return new UserId(new ObjectId(id));
+    }
+
     @JsonValue
     public String toHexString () {
         return value.toHexString();
-    }
-
-    public static UserId fromString ( String id ) {
-        return new UserId(new ObjectId(id));
     }
 }
