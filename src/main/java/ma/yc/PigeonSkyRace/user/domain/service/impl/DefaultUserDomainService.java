@@ -8,6 +8,7 @@ import ma.yc.PigeonSkyRace.user.application.dto.request.LoginRequestDTO;
 import ma.yc.PigeonSkyRace.user.application.dto.request.RegisterRequestDTO;
 import ma.yc.PigeonSkyRace.user.application.dto.response.AuthResponseDTO;
 import ma.yc.PigeonSkyRace.user.application.mapper.UserMapper;
+import ma.yc.PigeonSkyRace.user.application.service.UserApplicationService;
 import ma.yc.PigeonSkyRace.user.domain.exception.InvalidCredentialsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserAlreadyExistsException;
 import ma.yc.PigeonSkyRace.user.domain.exception.UserRegistrationException;
@@ -22,7 +23,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class DefaultUserDomainService implements UserDomainService {
+public class DefaultUserDomainService implements UserDomainService, UserApplicationService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
@@ -62,10 +63,7 @@ public class DefaultUserDomainService implements UserDomainService {
     @Override
     public List<AuthResponseDTO> findAll () {
         List<User> users = repository.findAll();
-        return users
-                .stream()
-                .map(mapper::toDto)
-                .toList();
+        return users.stream().map(mapper::toDto).toList();
     }
 
     private void validateNewUser ( RegisterRequestDTO registerRequest ) {
@@ -79,5 +77,10 @@ public class DefaultUserDomainService implements UserDomainService {
         if (repository.existsByUsername(registerRequest.username())) {
             throw new UserAlreadyExistsException("Username already exists: " + registerRequest.username());
         }
+    }
+
+    @Override
+    public AuthResponseDTO getById ( UserId id ) {
+        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("User", id)));
     }
 }
