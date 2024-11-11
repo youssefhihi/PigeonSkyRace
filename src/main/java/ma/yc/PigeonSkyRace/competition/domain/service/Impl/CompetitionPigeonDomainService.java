@@ -1,9 +1,11 @@
 package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionPigeonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionPigeonMapper;
+import ma.yc.PigeonSkyRace.competition.application.service.CompetitionPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompetitionPigeonDomainService implements CompetitionPigeonService {
+public class CompetitionPigeonDomainService implements CompetitionPigeonService , CompetitionPigeonApplicationService {
 
     private final CompetitionPigeonRepository repository;
     private final CompetitionPigeonMapper mapper;
@@ -72,6 +74,14 @@ public class CompetitionPigeonDomainService implements CompetitionPigeonService 
 
         return new Coordinate(sumLatitude / count, sumLongitude / count);
     }
-    
 
+
+    @Override
+    public CompetitionPigeon findBySeasonPigeonAndCompetition(SeasonPigeon seasonPigeon, Competition competition) {
+        return  repository.findBySeasonPigeonAndCompetition(
+                seasonPigeon, competition
+        ).orElseThrow( () ->
+             new NotFoundException("Competition-Pigeon",seasonPigeon.getSeason().getId())
+        );
+    }
 }

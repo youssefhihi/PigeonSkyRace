@@ -9,6 +9,7 @@ import ma.yc.PigeonSkyRace.piegon.application.mapper.PigeonMapper;
 import ma.yc.PigeonSkyRace.piegon.application.service.PigeonApplicationService;
 import ma.yc.PigeonSkyRace.piegon.domain.exception.InvalidLoftException;
 import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.BandNumber;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.PigeonId;
 import ma.yc.PigeonSkyRace.piegon.domain.service.LoftDomainService;
@@ -36,5 +37,10 @@ public class DefaultPigeonDomainService implements PigeonDomainService, PigeonAp
     @Override
     public Pigeon findPigeonById ( PigeonId value ) {
         return repository.findById(value).orElseThrow(() -> new NotFoundException("pigeon", value));
+    }
+
+    @Override
+    public Pigeon findPigeonByBandNumber(BandNumber value ) {
+        return repository.findByBandNumber(BandNumber.fromString(value.toString())).orElseThrow(() -> new NotFoundException("pigeon", value));
     }
 }

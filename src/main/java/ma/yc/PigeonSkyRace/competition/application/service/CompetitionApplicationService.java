@@ -1,4 +1,9 @@
 package ma.yc.PigeonSkyRace.competition.application.service;
 
-public class CompetitionApplicationService {
+import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
+
+import java.time.LocalDateTime;
+
+public interface CompetitionApplicationService {
+    Competition getCurrentCompetition();
 }

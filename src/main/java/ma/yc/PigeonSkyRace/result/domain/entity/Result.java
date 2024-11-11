@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
+import ma.yc.PigeonSkyRace.result.domain.valueObject.ResultId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Document(collection = "results")
 public class Result {
     @Id
-    private UUID id;
+    private ResultId id;
 
     @DateTimeFormat
     private LocalDateTime dateArrival;

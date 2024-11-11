@@ -52,6 +52,8 @@ public class Competition {
     @NotNull
     private SeasonId seasonId;
 
+
+
     @CreatedDate
     private LocalDateTime createdDate;
 

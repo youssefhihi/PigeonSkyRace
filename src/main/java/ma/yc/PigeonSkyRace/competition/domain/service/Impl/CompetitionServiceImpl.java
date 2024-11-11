@@ -5,6 +5,7 @@ import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.events.CompetitionCreatedEvent;
+import ma.yc.PigeonSkyRace.competition.application.service.CompetitionApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
@@ -15,12 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompetitionServiceImpl implements CompetitionService {
+public class CompetitionServiceImpl implements CompetitionService, CompetitionApplicationService {
 
     private final CompetitionRepository repository;
     private final CompetitionMapper mapper;
@@ -58,4 +60,9 @@ public class CompetitionServiceImpl implements CompetitionService {
        throw new NotFoundException("Competition", id);
     }
 
+    @Override
+    public Competition getCurrentCompetition() {
+        LocalDateTime now = LocalDateTime.now();
+        return repository.findFirstByStartTimeBeforeAndEndTimeAfter(now,now).orElseThrow(() -> new NotFoundException("Competition", now));
+    }
 }
