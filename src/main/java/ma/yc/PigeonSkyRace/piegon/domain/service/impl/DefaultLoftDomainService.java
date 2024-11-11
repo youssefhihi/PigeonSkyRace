@@ -14,12 +14,14 @@ import ma.yc.PigeonSkyRace.piegon.domain.service.LoftDomainService;
 import ma.yc.PigeonSkyRace.piegon.domain.service.LoftNameGenerator;
 import ma.yc.PigeonSkyRace.piegon.infrastructure.repository.LoftRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class DefaultLoftDomainService implements LoftDomainService, LoftApplicationService {
 
     private final LoftRepository repository;
