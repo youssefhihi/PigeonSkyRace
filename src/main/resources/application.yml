@@ -1,14 +1,31 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://db:27017/myapp
+      uri: mongodb://localhost:27017/myapp
       authentication-database: admin
       auto-index-creation: true
+
 server:
   port: 8080
   servlet:
     context-path: /
+
 logging:
   level:
     org.springframework.web: DEBUG
     ma.yc.PigeonSkyRace: DEBUG
+
+##---------- API information ---------------------------------
+contact:
+  email: yc.ma
+
+local-server:
+  url: http://localhost:8080/
+
+prod-server:
+  url: http://localhost:8080/
+
+project:
+  version: 1.0
+  title: Pigeon sky race
+  description: pigeon sky race pour la gestion des compétitions des pigeons

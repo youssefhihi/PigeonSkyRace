@@ -5,5 +5,5 @@ import ma.yc.PigeonSkyRace.piegon.domain.model.entity.Loft;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
 
 public interface LoftApplicationService {
-    Coordinate geLoftCoordinate(LoftId loftId);
+    Coordinate geLoftCoordinate ( LoftId loftId );
 }

@@ -1,10 +1,19 @@
 package ma.yc.PigeonSkyRace.result.application.dto.response;
 
 import jakarta.validation.constraints.NotNull;
+import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
+import ma.yc.PigeonSkyRace.result.domain.valueObject.ResultId;
 
 import java.time.LocalDateTime;
 
 public record ResultResponseDto(
-        @NotNull LocalDateTime dateArrival
+        ResultId id,
+        Double distance,
+        Double speed,
+        Double points,
+        CompetitionPigeon competitionPigeon,
+        LocalDateTime createdDate,
+        LocalDateTime dateArrival
+
 ) {
 }

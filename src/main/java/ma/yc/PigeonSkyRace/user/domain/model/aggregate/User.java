@@ -31,7 +31,7 @@ public class User {
 
     @NotBlank
     @Indexed(unique = true)
-    private String userName;
+    private String username;
 
     @Email
     @Indexed(unique = true)
@@ -43,12 +43,12 @@ public class User {
     private Role role;
 
     @DBRef
-    private List<Loft> lofts  = new ArrayList<>();
+    private List<Loft> lofts = new ArrayList<>();
 
     @CreatedDate
     private LocalDateTime createdDate;
 
-    public User() {
+    public User () {
         this.id = new UserId();
     }
 }

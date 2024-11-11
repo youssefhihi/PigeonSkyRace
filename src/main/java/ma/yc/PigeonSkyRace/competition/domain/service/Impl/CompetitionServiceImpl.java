@@ -60,9 +60,5 @@ public class CompetitionServiceImpl implements CompetitionService, CompetitionAp
        throw new NotFoundException("Competition", id);
     }
 
-    @Override
-    public Competition getCurrentCompetition() {
-        LocalDateTime now = LocalDateTime.now();
-        return repository.findFirstByStartTimeBeforeAndEndTimeAfter(now,now).orElseThrow(() -> new NotFoundException("Competition", now));
-    }
+
 }

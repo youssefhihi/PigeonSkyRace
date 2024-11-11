@@ -4,11 +4,11 @@ import ma.yc.PigeonSkyRace.piegon.application.dto.request.PigeonRequestDTO;
 import ma.yc.PigeonSkyRace.piegon.application.dto.response.PigeonResponseDTO;
 import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
-import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.PigeonId;
 import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+
 
 @Mapper(componentModel = "spring")
 public interface PigeonMapper {
@@ -18,22 +18,10 @@ public interface PigeonMapper {
     @Mapping(target = "loft", source = "loftId", qualifiedByName = "stringToLoftId")
     Pigeon toEntity ( PigeonRequestDTO dto );
 
-
-    @Mapping(source = "id", target = "id", qualifiedByName = "pigeonIdToString")
-    @Mapping(source = "loft", target = "loftId", qualifiedByName = "loftIdToString")
-    @Mapping(source = "createdDate", target = "createdDate")
-    PigeonResponseDTO toDto( Pigeon pigeon);
-
-    @Named("pigeonIdToString")
-    default String pigeonIdToString ( PigeonId id) {
-        return id != null ? id.toHexString() : null;
-    }
-
-    @Named("loftIdToString")
-    default String loftIdToString ( LoftId id) {
-        return id != null ? id.toHexString() : null;
-    }
-
+    @Mapping(target = "id", expression = "java(pigeon.getId().toHexString())")
+    @Mapping(target = "loftId", expression = "java(pigeon.getLoft().toHexString())")
+    @Mapping(target = "createdDate", source = "createdDate",dateFormat = "yyyy-MM-dd HH:mm:ss")
+    PigeonResponseDTO toDto ( Pigeon pigeon );
 
     @Named("stringToLoftId")
     default LoftId stringToLoftId ( String loftId ) {
@@ -42,5 +30,4 @@ public interface PigeonMapper {
         }
         return new LoftId(new ObjectId(loftId));
     }
-
 }

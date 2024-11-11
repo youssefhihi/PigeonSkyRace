@@ -26,7 +26,7 @@ class CompetitionController {
     private final CompetitionService competitionService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<CompetitionResponseDto>> createCompetition ( @Valid @RequestBody CompetitionRequestDto competition ) {
+    public ResponseEntity<ApiResponse<CompetitionResponseDto>> createCompetition(@Valid @RequestBody CompetitionRequestDto competition) {
         CompetitionResponseDto createdCompetition = competitionService.createCompetition(competition);
         ApiResponse<CompetitionResponseDto> response = new ApiResponse<>(createdCompetition, "Competition created successfully", HttpStatus.CREATED);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -34,7 +34,7 @@ class CompetitionController {
 
 
     @GetMapping
-    public ResponseEntity<List<CompetitionResponseDto>> getAllCompetitions () {
+    public ResponseEntity<List<CompetitionResponseDto>> getAllCompetitions() {
         List<CompetitionResponseDto> competitions = competitionService.getAllCompetitions();
         return new ResponseEntity<>(competitions, HttpStatus.OK);
     }

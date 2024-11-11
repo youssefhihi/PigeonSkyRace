@@ -15,6 +15,5 @@ public interface CompetitionRepository extends MongoRepository<Competition, Comp
     @Query("{ 'id': ?0 }")
     @Update("{ '$set': { 'coordinate': ?1 }}")
    void updateCoordinateById(CompetitionId id, Coordinate coordinate);
-    Optional<Competition> findFirstByStartTimeBeforeAndEndTimeAfter(LocalDateTime startTime, LocalDateTime endTime);
-
+    Optional<Competition> findFirstByDateStartBeforeAndDateEndAfter(LocalDateTime startTime, LocalDateTime endTime);
 }

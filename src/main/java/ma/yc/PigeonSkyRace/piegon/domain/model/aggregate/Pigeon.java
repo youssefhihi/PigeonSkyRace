@@ -27,7 +27,7 @@ public class Pigeon {
     @Id
     private PigeonId id;
 
-    @NotBlank
+    @NotNull
     private BandNumber bandNumber;
 
     @NotNull
