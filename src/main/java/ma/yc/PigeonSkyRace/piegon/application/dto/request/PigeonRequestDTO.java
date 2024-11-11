@@ -17,6 +17,6 @@ public record PigeonRequestDTO(
 
         @NotBlank String color,
 
-        @EntityExists(entity = Loft.class , message = "The specified loft does not exist")
+        @EntityExists(entity = Loft.class, message = "The specified loft does not exist")
         @NotBlank String loftId) {
 }

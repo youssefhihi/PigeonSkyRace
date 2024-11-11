@@ -13,9 +13,6 @@ import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
 import ma.yc.PigeonSkyRace.piegon.domain.service.LoftDomainService;
 import ma.yc.PigeonSkyRace.piegon.domain.service.LoftNameGenerator;
 import ma.yc.PigeonSkyRace.piegon.infrastructure.repository.LoftRepository;
-import ma.yc.PigeonSkyRace.user.application.service.UserApplicationService;
-import ma.yc.PigeonSkyRace.user.domain.exception.InvalidUserException;
-import ma.yc.PigeonSkyRace.user.domain.model.valueobject.UserId;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +25,6 @@ public class DefaultLoftDomainService implements LoftDomainService, LoftApplicat
     private final LoftRepository repository;
     private final LoftMapper mapper;
     private final LoftNameGenerator loftNameGenerator;
-    private final UserApplicationService userApplicationService;
 
     @Override
     public boolean existsById ( LoftId id ) {
@@ -47,11 +43,6 @@ public class DefaultLoftDomainService implements LoftDomainService, LoftApplicat
 
     @Override
     public LoftResponseDTO create ( LoftRequestDTO dto ) {
-        try {
-            userApplicationService.getById(UserId.fromString(dto.userId()));
-        } catch (NotFoundException e) {
-            throw new InvalidUserException("User with ID " + dto.userId() + " does not exist", e);
-        }
 
         Loft loft = mapper.toEntity(dto);
         String uniqueName = generateUniqueLoftName();
@@ -64,7 +55,6 @@ public class DefaultLoftDomainService implements LoftDomainService, LoftApplicat
     public Coordinate geLoftCoordinate ( LoftId loftId ) {
         return repository.getCoordinateById(loftId);
     }
-
 
     private String generateUniqueLoftName () {
         String uniqueName;

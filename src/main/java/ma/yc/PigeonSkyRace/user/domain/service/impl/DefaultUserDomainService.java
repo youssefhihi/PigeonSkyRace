@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class DefaultUserDomainService implements UserDomainService, UserApplicationService {
+public class DefaultUserDomainService implements UserDomainService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
@@ -79,8 +79,4 @@ public class DefaultUserDomainService implements UserDomainService, UserApplicat
         }
     }
 
-    @Override
-    public AuthResponseDTO getById ( UserId id ) {
-        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("User", id)));
-    }
 }
