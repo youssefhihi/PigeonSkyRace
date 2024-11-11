@@ -17,13 +17,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/lofts")
 @RequiredArgsConstructor
-@Validated
 class LoftController {
 
     private final DefaultLoftDomainService service;
 
     @PostMapping()
-    public ResponseEntity<ResponseApi<LoftResponseDTO>> createLoft ( @Valid @RequestBody LoftRequestDTO loftRequest ) {
+    public ResponseEntity<ResponseApi<LoftResponseDTO>> create ( @Valid @RequestBody LoftRequestDTO loftRequest ) {
         LoftResponseDTO response = service.create(loftRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
