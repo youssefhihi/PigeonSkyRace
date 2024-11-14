@@ -55,6 +55,13 @@ public class DefaultPigeonDomainService implements PigeonDomainService, PigeonAp
 
     @Override
     public Pigeon findPigeonByBandNumber(BandNumber value ) {
-        return repository.findByBandNumber(BandNumber.fromString(value.toString())).orElseThrow(() -> new NotFoundException("pigeon", value));
+        return repository.findByBandNumber(value).orElseThrow(() -> new NotFoundException("pigeon", value));
+    }
+
+    @Override
+    public Boolean deletePigeonById ( PigeonId id ) {
+        Pigeon pigeon = findPigeonById(id);
+        repository.delete(pigeon);
+        return true;
     }
 }

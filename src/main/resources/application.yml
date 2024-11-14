@@ -5,6 +5,7 @@ spring:
       authentication-database: admin
       auto-index-creation: true
 
+
 server:
   port: 8080
   servlet:

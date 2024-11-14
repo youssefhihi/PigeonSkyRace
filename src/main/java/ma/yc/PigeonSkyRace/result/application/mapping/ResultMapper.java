@@ -9,5 +9,6 @@ import org.mapstruct.Mapper;
 public interface ResultMapper {
     Result toEntity(ResultRequestDto result);
 
+
     ResultResponseDto toDto(Result result);
 }

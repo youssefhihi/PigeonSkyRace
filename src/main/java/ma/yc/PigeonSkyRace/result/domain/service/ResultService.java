@@ -8,4 +8,5 @@ import ma.yc.PigeonSkyRace.result.application.dto.response.ResultResponseDto;
 
 public interface ResultService {
     ResultResponseDto createResult(ResultRequestDto requestDto, CompetitionResponseDto competition);
+    ResultResponseDto calculatePoint();
 }

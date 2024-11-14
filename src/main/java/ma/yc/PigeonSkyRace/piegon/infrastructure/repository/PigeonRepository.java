@@ -10,5 +10,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PigeonRepository extends MongoRepository<Pigeon, PigeonId> {
-Optional<Pigeon> findByBandNumber(BandNumber bandNumber);
+    Optional<Pigeon> findByBandNumber(BandNumber bandNumber);
 }

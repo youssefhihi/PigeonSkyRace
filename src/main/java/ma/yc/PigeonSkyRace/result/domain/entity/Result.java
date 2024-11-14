@@ -1,5 +1,6 @@
 package ma.yc.PigeonSkyRace.result.domain.entity;
 
+import com.mongodb.lang.Nullable;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,4 +40,8 @@ public class Result {
 
     @CreatedDate
     private LocalDateTime createdDate;
+
+    public Result() {
+        this.id = new ResultId();
+    }
 }

@@ -1,6 +1,7 @@
 package ma.yc.PigeonSkyRace.result.domain.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import ma.yc.PigeonSkyRace.common.application.service.Helper;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionMapper;
 import ma.yc.PigeonSkyRace.competition.application.service.CompetitionPigeonApplicationService;
@@ -21,6 +22,8 @@ import ma.yc.PigeonSkyRace.result.infrastructure.repository.ResultRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+
+import static ma.yc.PigeonSkyRace.common.application.service.Helper.calculateDistance;
 
 @Service
 @RequiredArgsConstructor
@@ -46,8 +49,8 @@ public class ResultDomainService implements ResultService {
 
         Result result = mapper.toEntity(requestDto);
         result.setCompetitionPigeon(competitionPigeon);
-        // loft coordinate
-        result.setDistance(calculateDistance(loftApplicationService.geLoftCoordinate(pigeon.getLoft()),competition.coordinate()));
+        Coordinate loftCoordinate =loftApplicationService.geLoftCoordinate(pigeon.getLoft());
+        result.setDistance(calculateDistance(loftCoordinate,competition.coordinate()));
         Duration flightTime = Duration.between(competition.dateStart(), result.getDateArrival());
         result.setSpeed(calculateSpeed(result.getDistance(),flightTime));
 
@@ -56,23 +59,16 @@ public class ResultDomainService implements ResultService {
 
 
     private double calculateSpeed(double distance, Duration flightTime) {
-        return distance * 1000 / flightTime.toMinutes();
+        return  Math.round(distance * 1000 / flightTime.toMinutes());
     }
 
-    public static double calculateDistance(Coordinate loftCoordinate,Coordinate competitionCoordinate) {
 
-        double loftLatRad = Math.toRadians(loftCoordinate.latitude());
-        double loftLonRad = Math.toRadians(loftCoordinate.longitude());
-        double competitionLatRad = Math.toRadians(competitionCoordinate.latitude());
-        double competitionLonRad = Math.toRadians(competitionCoordinate.longitude());
-
-        double deltaLat = competitionLatRad - loftLatRad;
-        double deltaLon = competitionLonRad - loftLonRad;
-        double a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2)
-                + Math.cos(loftLatRad) * Math.cos(competitionLatRad)
-                * Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return 6371.01 * c;
+    @Override
+    public ResultResponseDto calculatePoint(){
+return null ;
     }
+
+
+
+
 }
