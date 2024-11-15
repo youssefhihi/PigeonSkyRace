@@ -10,6 +10,7 @@ import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicati
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
 import ma.yc.PigeonSkyRace.piegon.application.service.LoftApplicationService;
@@ -24,6 +25,7 @@ import ma.yc.PigeonSkyRace.result.infrastructure.repository.ResultRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,20 +68,21 @@ public class ResultDomainService implements ResultService {
 
 
     @Override
-    public List<ResultResponseDto> calculatePoint(CompetitionPigeonId id) {
-        List<Result> results = repository.findAllByCompetitionPigeonOrderBySpeed(competitionPigeonApplicationService.findById(id));
-        results.getFirst().setPoints(100.0);
-
-        for (int i = 1; i < results.size(); i++) {
-            Double point = 100.0 - (i * 100.0 / results.get(i).getCompetitionPigeon().getCompetition().getMaxPigeons());
-            results.get(i).setPoints(point);
-            repository.save(results.get(i));
+    public List<ResultResponseDto> calculatePoint(CompetitionResponseDto competition) {
+        List<CompetitionPigeon> competitionPigeon = competitionPigeonApplicationService.findByCompetition(competitionMapper.toEntity(competition));
+        List<Result> results = new ArrayList<>();
+        for (CompetitionPigeon cp : competitionPigeon) {
+            results.add(repository.findByCompetitionPigeon(cp));
         }
-        return results.stream()
-                .map(mapper::toDto)
-                .sorted((curr, next) -> Double.compare(next.points(), curr.points()))
-                .collect(Collectors.toList());
+      List<Result> sortedResults =  results.stream().sorted((curr, next) -> Double.compare(next.getSpeed(), curr.getSpeed())).toList();
 
+        sortedResults.getFirst().setPoints(100.0);
+        for (int i = 1; i < sortedResults.size(); i++) {
+            Double point = 100.0 - (i * 100.0 / sortedResults.get(i).getCompetitionPigeon().getCompetition().getMaxPigeons());
+            sortedResults.get(i).setPoints(point);
+            repository.save(sortedResults.get(i));
+        }
+        return sortedResults.stream().map(mapper::toDto).sorted((curr, next) -> Double.compare(next.points(), curr.points())).toList();
     }
 
 

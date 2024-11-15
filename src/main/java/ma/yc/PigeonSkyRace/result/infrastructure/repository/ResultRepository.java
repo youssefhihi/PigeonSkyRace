@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface ResultRepository extends MongoRepository<Result, ResultId> {
-    List<Result> findAllByCompetitionPigeonOrderBySpeed ( CompetitionPigeon competitionPigeon );
+    Result findByCompetitionPigeon(CompetitionPigeon competitionPigeon);
 
 }

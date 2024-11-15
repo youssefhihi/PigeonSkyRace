@@ -1,5 +1,7 @@
 package ma.yc.PigeonSkyRace.common.infrastructure.web;
 
+import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
+import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
 import ma.yc.PigeonSkyRace.piegon.domain.exception.InvalidLoftException;
 import ma.yc.PigeonSkyRace.piegon.domain.exception.InvalidLoftIdFormatException;
 import ma.yc.PigeonSkyRace.user.domain.exception.InvalidCredentialsException;
@@ -16,6 +18,13 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse>handleNotFoundException(NotFoundException e) {
+        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(),HttpStatus.BAD_REQUEST.value(), "Not Found",e.getMessage() );
+        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(InvalidLoftIdFormatException.class)
     public ResponseEntity<String> handleInvalidLoftIdFormatException ( InvalidLoftIdFormatException ex ) {
@@ -37,6 +46,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidationExceptions ( MethodArgumentNotValidException ex ) {
@@ -56,6 +66,12 @@ public class GlobalExceptionHandler {
         ErrorResponse error = new ErrorResponse(LocalDateTime.now(), HttpStatus.UNAUTHORIZED.value(), "Authentication Error", e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
     }
+    @ExceptionHandler(FailedToRegister.class)
+    public ResponseEntity<ErrorResponse> handleRegisterFailed ( FailedToRegister e ) {
+        ErrorResponse error = new ErrorResponse(LocalDateTime.now(), HttpStatus.UNAUTHORIZED.value(), "register Error", e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+    }
+
 }
 
 record ErrorResponse(LocalDateTime timestamp, int status, String error, String message) {

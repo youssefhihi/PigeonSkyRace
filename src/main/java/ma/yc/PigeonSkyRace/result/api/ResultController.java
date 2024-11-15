@@ -30,28 +30,37 @@ public class ResultController {
 
 
     @PostMapping("/{competitionId}")
-    public ResponseEntity<ResponseApi<ResultResponseDto>> createResult ( @PathVariable String competitionId, @RequestBody ResultRequestDto resultRequestDto ) {
+    public ResponseEntity<ResponseApi<ResultResponseDto>> createResult(
+            @PathVariable String competitionId,
+            @RequestBody ResultRequestDto resultRequestDto) {
 
         CompetitionResponseDto competitionResponseDto = competitionApplicationService.getCompetition(CompetitionId.fromString(competitionId));
-        ResultResponseDto responseDto = resultService.createResult(resultRequestDto, competitionResponseDto);
+       ResultResponseDto responseDto = resultService.createResult(resultRequestDto, competitionResponseDto);
 
-        ResponseApi<ResultResponseDto> response = new ResponseApi<>(responseDto, "The information stored with success for competition ", HttpStatus.CREATED);
+        ResponseApi<ResultResponseDto> response = new ResponseApi<>(
+                responseDto,
+                "The information stored with success for competition ",
+                HttpStatus.CREATED
+        );
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<ResultResponseDto>> getResult ( @PathVariable String id ) {
-        List<ResultResponseDto> resultsResponseDto = resultService.calculatePoint(CompetitionPigeonId.fromString(id));
+    @GetMapping("/{competitionId}")
+    public ResponseEntity<List<ResultResponseDto>> getResult(@PathVariable String competitionId){
+        CompetitionResponseDto competitionResponseDto = competitionApplicationService.getCompetition(CompetitionId.fromString(competitionId));
+        List<ResultResponseDto> resultsResponseDto = resultService.calculatePoint(competitionResponseDto);
 
         return new ResponseEntity<>(resultsResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}/pdf")
-    public ResponseEntity<byte[]> downloadResultPdf ( @PathVariable String id ) {
+    @GetMapping("/{competitionId}/pdf")
+    public ResponseEntity<byte[]> downloadResultPdf ( @PathVariable String competitionId ) {
         try {
-            List<ResultResponseDto> results = resultService.calculatePoint(CompetitionPigeonId.fromString(id));
+            CompetitionResponseDto competitionResponseDto = competitionApplicationService.getCompetition(CompetitionId.fromString(competitionId));
+
+            List<ResultResponseDto> results = resultService.calculatePoint(competitionResponseDto);
 
             byte[] pdfBytes = pdfGenerationService.generateResultsPdf(results);
 

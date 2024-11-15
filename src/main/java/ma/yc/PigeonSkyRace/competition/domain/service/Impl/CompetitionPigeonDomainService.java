@@ -77,4 +77,8 @@ public class CompetitionPigeonDomainService implements CompetitionPigeonService 
         return repository.findById(id).orElseThrow(() -> new NotFoundException("competitionPigeon", id));
     }
 
+    @Override
+    public List<CompetitionPigeon> findByCompetition(Competition competition) {
+        return repository.findByCompetition(competition);
+    }
 }

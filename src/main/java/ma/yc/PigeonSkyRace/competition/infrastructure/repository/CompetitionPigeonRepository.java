@@ -4,6 +4,7 @@ import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 
+import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
 import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
 import org.springframework.data.mongodb.repository.MongoRepository;
