@@ -1,6 +1,5 @@
 package ma.yc.PigeonSkyRace.result.infrastructure.repository;
 
-import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.result.domain.entity.Result;
 import ma.yc.PigeonSkyRace.result.domain.valueObject.ResultId;
