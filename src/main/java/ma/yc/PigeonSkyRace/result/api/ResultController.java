@@ -51,10 +51,8 @@ public class ResultController {
     @GetMapping("/{id}/pdf")
     public ResponseEntity<byte[]> downloadResultPdf ( @PathVariable String id ) {
         try {
-            // Get results
             List<ResultResponseDto> results = resultService.calculatePoint(CompetitionPigeonId.fromString(id));
 
-            // Generate PDF
             byte[] pdfBytes = pdfGenerationService.generateResultsPdf(results);
 
             // Set up response headers

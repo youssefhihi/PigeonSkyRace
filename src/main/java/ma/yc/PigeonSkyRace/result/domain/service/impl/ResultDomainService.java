@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ma.yc.PigeonSkyRace.common.application.service.Helper.calculateDistance;
 
@@ -74,7 +75,11 @@ public class ResultDomainService implements ResultService {
             results.get(i).setPoints(point);
             repository.save(results.get(i));
         }
-        return results.stream().map(mapper::toDto).sorted((curr, next) -> Double.compare(next.points(), curr.points())).toList();
+        return results.stream()
+                .map(mapper::toDto)
+                .sorted((curr, next) -> Double.compare(next.points(), curr.points()))
+                .collect(Collectors.toList());
+
     }
 
 
