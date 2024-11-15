@@ -2,6 +2,7 @@ package ma.yc.PigeonSkyRace.result.application.dto.response;
 
 import jakarta.validation.constraints.NotNull;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.BandNumber;
 import ma.yc.PigeonSkyRace.result.domain.valueObject.ResultId;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ public record ResultResponseDto(
         Double distance,
         Double speed,
         Double points,
-        CompetitionPigeon competitionPigeon,
+        BandNumber bandNumber,
         LocalDateTime createdDate,
         LocalDateTime dateArrival
 

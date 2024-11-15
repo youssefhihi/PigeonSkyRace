@@ -12,6 +12,7 @@ import ma.yc.PigeonSkyRace.competition.application.service.CompetitionPigeonAppl
 import ma.yc.PigeonSkyRace.competition.application.service.SeasonApplicationService;
 import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
@@ -26,6 +27,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -48,11 +51,18 @@ public class ResultController {
 
         ResponseApi<ResultResponseDto> response = new ResponseApi<>(
                 responseDto,
-                "The information stored with success for competition : " + responseDto.competitionPigeon().getCompetition().getName(),
+                "The information stored with success for competition ",
                 HttpStatus.CREATED
         );
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<ResultResponseDto>> getResult(@PathVariable String id){
+        List<ResultResponseDto> resultsResponseDto = resultService.calculatePoint(CompetitionPigeonId.fromString(id));
+
+        return new ResponseEntity<>(resultsResponseDto, HttpStatus.CREATED);
     }
 }

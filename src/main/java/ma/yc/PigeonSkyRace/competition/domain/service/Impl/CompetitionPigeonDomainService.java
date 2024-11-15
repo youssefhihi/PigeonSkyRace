@@ -7,7 +7,7 @@ import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionPigeo
 import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionPigeonMapper;
 import ma.yc.PigeonSkyRace.competition.application.service.CompetitionPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
-import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,20 +62,6 @@ public class CompetitionPigeonDomainService implements CompetitionPigeonService 
     }
 
 
-    private Coordinate calculateAverageCoordinate(List<CompetitionPigeon> competitionPigeons) {
-        double sumLatitude = 0;
-        double sumLongitude = 0;
-        int count = competitionPigeons.size();
-
-        for (CompetitionPigeon pigeon : competitionPigeons) {
-            Coordinate pigeonCoordinate = applicationService.geLoftCoordinate(pigeon.getSeasonPigeon().getPigeon().getLoft());
-            sumLatitude += pigeonCoordinate.latitude();
-            sumLongitude += pigeonCoordinate.longitude();
-        }
-
-        return new Coordinate(sumLatitude / count, sumLongitude / count);
-    }
-
 
     @Override
     public CompetitionPigeon findBySeasonPigeonAndCompetition(SeasonPigeon seasonPigeon, Competition competition) {
@@ -84,4 +71,10 @@ public class CompetitionPigeonDomainService implements CompetitionPigeonService 
              new NotFoundException("Competition-Pigeon",seasonPigeon.getSeason().getId())
         );
     }
+
+    @Override
+    public CompetitionPigeon findById(CompetitionPigeonId id){
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("competitionPigeon", id));
+    }
+
 }
