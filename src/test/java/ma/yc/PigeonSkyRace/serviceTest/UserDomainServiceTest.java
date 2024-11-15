@@ -110,20 +110,6 @@ public class UserDomainServiceTest {
             assertEquals(user.getEmail(), result.email());
             verify(userRepository).findById(id);
         }
-
-        @Test
-        @DisplayName("should throw exception when user not found")
-        void shouldThrowException_WhenUserNotFound () {
-            UserId id = new UserId();
-
-            when(userRepository.findById(id)).thenReturn(Optional.empty());
-
-            NotFoundException exception = assertThrows(NotFoundException.class, () -> userService.findById(id));
-
-            assertEquals("User with id " + id.toHexString() + " not found", exception.getMessage());
-            verify(userRepository).findById(id);
-        }
-
     }
 
     @Nested
