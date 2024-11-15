@@ -19,6 +19,7 @@ public abstract class ResultMapper {
 
     @Mapping(target = "bandNumber", expression = "java(result.getCompetitionPigeon().getSeasonPigeon().getPigeon().getBandNumber())")
     @Mapping(target = "loft", expression = "java(getLoftName(result.getCompetitionPigeon().getSeasonPigeon().getPigeon().getLoft()))")
+    @Mapping(target = "createdDate", expression = "java(java.time.LocalDateTime.now())")
     public abstract ResultResponseDto toDto(Result result);
 
     protected String getLoftName(LoftId loftId) {

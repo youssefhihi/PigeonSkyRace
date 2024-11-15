@@ -64,7 +64,6 @@ public class ResultController {
 
             byte[] pdfBytes = pdfGenerationService.generateResultsPdf(results);
 
-            // Set up response headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDisposition(ContentDisposition.builder("attachment").filename("race-results.pdf").build());
