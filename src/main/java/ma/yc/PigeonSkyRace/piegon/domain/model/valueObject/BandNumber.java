@@ -17,11 +17,11 @@ public record BandNumber(@NotBlank String value) {
     }
 
     private static void validate ( String value ) {
-//        if (!BAND_NUMBER_PATTERN.matcher(value).matches()) {
-//            throw new IllegalArgumentException(
-//                    "Invalid band number format. Expected format: AU 2003 XYZ 3234534"
-//            );
-//        }
+        if (!BAND_NUMBER_PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException(
+                    "Invalid band number format. Expected format: AU 2003 XYZ 3234534"
+            );
+        }
 
         String[] parts = value.split(" ");
         int year = Integer.parseInt(parts[1]);
@@ -43,6 +43,8 @@ public record BandNumber(@NotBlank String value) {
     public String getValue () {
         return value;
     }
+
+
 }
 
 
