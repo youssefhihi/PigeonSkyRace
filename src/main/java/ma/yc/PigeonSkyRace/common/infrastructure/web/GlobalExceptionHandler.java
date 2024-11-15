@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse>handleNotFoundException(NotFoundException e) {
         ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(),HttpStatus.BAD_REQUEST.value(), "Not Found",e.getMessage() );

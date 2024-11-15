@@ -11,5 +11,6 @@ public record LoftRequestDTO(
         CoordinateRequestDTO coordinate,
 
         @EntityExists(entity = User.class, message = "The specified breeder does not exist")
-        @NotNull String userId) {
+        @NotNull
+        String userId) {
 }
