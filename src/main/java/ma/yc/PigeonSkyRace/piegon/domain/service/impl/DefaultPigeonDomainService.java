@@ -8,6 +8,7 @@ import ma.yc.PigeonSkyRace.piegon.application.dto.response.PigeonResponseDTO;
 import ma.yc.PigeonSkyRace.piegon.application.mapper.PigeonMapper;
 import ma.yc.PigeonSkyRace.piegon.application.service.PigeonApplicationService;
 import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
+import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.BandNumber;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.PigeonId;
 import ma.yc.PigeonSkyRace.piegon.domain.service.LoftDomainService;
 import ma.yc.PigeonSkyRace.piegon.domain.service.PigeonDomainService;
@@ -50,5 +51,17 @@ public class DefaultPigeonDomainService implements PigeonDomainService, PigeonAp
         return repository
                 .findById(id)
                 .orElseThrow(() -> new NotFoundException("pigeon", id));
+    }
+
+    @Override
+    public Pigeon findPigeonByBandNumber(BandNumber value ) {
+        return repository.findByBandNumber(value).orElseThrow(() -> new NotFoundException("pigeon", value));
+    }
+
+    @Override
+    public Boolean deletePigeonById ( PigeonId id ) {
+        Pigeon pigeon = findPigeonById(id);
+        repository.delete(pigeon);
+        return true;
     }
 }

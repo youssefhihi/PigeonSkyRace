@@ -12,6 +12,7 @@ import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.LoftId;
 import ma.yc.PigeonSkyRace.piegon.domain.model.valueObject.PigeonId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +29,7 @@ public class Pigeon {
     private PigeonId id;
 
     @NotNull
+    @Indexed(unique = true)
     private BandNumber bandNumber;
 
     @NotNull

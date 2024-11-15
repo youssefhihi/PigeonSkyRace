@@ -28,14 +28,13 @@ public class Season {
     @NotBlank
     private String description;
 
-
     @Field(name = "is_active")
     private Boolean isActive;
 
     @DBRef
     private List<SeasonPigeon> seasonPigeons = new ArrayList<>();
 
-    @DBRef
+    @DBRef()
     private List<Competition> competitions = new ArrayList<>();
 
     @CreatedDate

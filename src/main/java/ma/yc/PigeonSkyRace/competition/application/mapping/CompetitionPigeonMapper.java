@@ -10,7 +10,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CompetitionPigeonMapper {
     @Mapping(target = "createdDate", expression = "java(java.time.LocalDateTime.now())")
-    CompetitionPigeon toEntity(CompetitionPigeonRequestDto seasonPigeonRequestDto);
+    CompetitionPigeon toEntity(CompetitionPigeonRequestDto competitionPigeonRequestDto);
 
-    CompetitionPigeonResponseDto toDto(CompetitionPigeon seasonPigeon);
+    CompetitionPigeonResponseDto toDto(CompetitionPigeon competitionPigeon);
 }

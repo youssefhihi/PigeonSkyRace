@@ -56,7 +56,7 @@ class CompetitionServiceImplTest {
         competition.setCoordinate(new Coordinate(34.05, -118.25));
         SeasonId seasonId = new SeasonId();
         AdmissionPercentage num = new AdmissionPercentage(12.3);
-        competitionRequestDto = new CompetitionRequestDto("Spring Competition", "A fun competition", 100,100.0, num, LocalDateTime.now(), LocalDateTime.now(), seasonId);
+        competitionRequestDto = new CompetitionRequestDto("Spring Competition", "A fun competition", 100,new Coordinate(32.2949,-8.1755), num, LocalDateTime.now(), LocalDateTime.now(), seasonId);
         coordinate = new Coordinate(35.68, 139.69);
         competitionResponseDto = new CompetitionResponseDto(competitionId, "Spring Competition", "A fun competition", coordinate, 100,100.0, num,seasonId, LocalDateTime.now(), LocalDateTime.now(), null);
     }

@@ -55,7 +55,10 @@ public class DefaultLoftDomainService implements LoftDomainService, LoftApplicat
 
     @Override
     public Coordinate geLoftCoordinate ( LoftId loftId ) {
-        return repository.getCoordinateById(loftId);
+
+        Loft loft = repository.findById(loftId).orElseThrow(() -> new NotFoundException("Loft", loftId));
+
+        return loft.getCoordinate();
     }
 
     private String generateUniqueLoftName () {

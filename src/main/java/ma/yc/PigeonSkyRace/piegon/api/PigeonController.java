@@ -43,4 +43,13 @@ class PigeonController {
                 .status(HttpStatus.OK)
                 .body(ResponseApi.success(pigeonResponse, "Successfully retrieved the pigeon by id."));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete ( @Valid @PathVariable String id ) {
+        Boolean dd = service.deletePigeonById(PigeonId.fromString(id));
+        if (dd) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Pigeon deleted successfully.");
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Pigeon could not be deleted.");
+    }
 }

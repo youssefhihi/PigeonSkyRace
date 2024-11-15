@@ -11,6 +11,7 @@ public interface PigeonDomainService {
     PigeonResponseDTO create ( PigeonRequestDTO dto );
     List<PigeonResponseDTO> findAll();
     PigeonResponseDTO getSeasonById ( PigeonId value );
+    Boolean deletePigeonById ( PigeonId value );
 
 
 }

@@ -1,11 +1,13 @@
 package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionPigeonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionPigeonMapper;
+import ma.yc.PigeonSkyRace.competition.application.service.CompetitionPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
-import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionPigeonId;
 import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
 import ma.yc.PigeonSkyRace.competition.domain.entity.CompetitionPigeon;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
@@ -16,11 +18,12 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompetitionPigeonDomainService implements CompetitionPigeonService {
+public class CompetitionPigeonDomainService implements CompetitionPigeonService , CompetitionPigeonApplicationService {
 
     private final CompetitionPigeonRepository repository;
     private final CompetitionPigeonMapper mapper;
@@ -59,19 +62,19 @@ public class CompetitionPigeonDomainService implements CompetitionPigeonService 
     }
 
 
-    private Coordinate calculateAverageCoordinate(List<CompetitionPigeon> competitionPigeons) {
-        double sumLatitude = 0;
-        double sumLongitude = 0;
-        int count = competitionPigeons.size();
 
-        for (CompetitionPigeon pigeon : competitionPigeons) {
-            Coordinate pigeonCoordinate = applicationService.geLoftCoordinate(pigeon.getSeasonPigeon().getPigeon().getLoft());
-            sumLatitude += pigeonCoordinate.latitude();
-            sumLongitude += pigeonCoordinate.longitude();
-        }
-
-        return new Coordinate(sumLatitude / count, sumLongitude / count);
+    @Override
+    public CompetitionPigeon findBySeasonPigeonAndCompetition(SeasonPigeon seasonPigeon, Competition competition) {
+        return  repository.findBySeasonPigeonAndCompetition(
+                seasonPigeon, competition
+        ).orElseThrow( () ->
+             new NotFoundException("Competition-Pigeon",seasonPigeon.getSeason().getId())
+        );
     }
-    
+
+    @Override
+    public CompetitionPigeon findById(CompetitionPigeonId id){
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("competitionPigeon", id));
+    }
 
 }

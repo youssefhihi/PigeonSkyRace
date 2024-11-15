@@ -5,16 +5,19 @@ import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.SeasonPigeonRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.SeasonPigeonResponseDto;
 import ma.yc.PigeonSkyRace.competition.application.mapping.SeasonPigeonMapper;
+import ma.yc.PigeonSkyRace.competition.application.service.SeasonPigeonApplicationService;
 import ma.yc.PigeonSkyRace.competition.domain.Exception.FailedToRegister;
 import ma.yc.PigeonSkyRace.competition.domain.ValueObject.SeasonPigeonId;
+import ma.yc.PigeonSkyRace.competition.domain.entity.Season;
 import ma.yc.PigeonSkyRace.competition.domain.entity.SeasonPigeon;
 import ma.yc.PigeonSkyRace.competition.infrastructure.repository.SeasonPigeonRepository;
 import ma.yc.PigeonSkyRace.competition.domain.service.SeasonPigeonService;
+import ma.yc.PigeonSkyRace.piegon.domain.model.aggregate.Pigeon;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SeasonPigeonDomainService implements SeasonPigeonService {
+public class SeasonPigeonDomainService implements SeasonPigeonService , SeasonPigeonApplicationService {
     private final SeasonPigeonRepository repository;
     private final SeasonPigeonMapper mapper;
 
@@ -39,5 +42,12 @@ public class SeasonPigeonDomainService implements SeasonPigeonService {
     }
 
 
-
+    @Override
+    public SeasonPigeon findSeasonPigeonPigeonAndSeason(Season season, Pigeon pigeon) {
+        return  repository.findByPigeonAndSeason(
+                pigeon, season
+        ).orElseThrow(() ->
+             new NotFoundException("pigeonSeason", pigeon.getId())
+        );
+    }
 }
