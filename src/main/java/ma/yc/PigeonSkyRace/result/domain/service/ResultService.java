@@ -12,5 +12,5 @@ import java.util.List;
 
 public interface ResultService {
     ResultResponseDto createResult(ResultRequestDto requestDto, CompetitionResponseDto competition);
-    List<ResultResponseDto> calculatePoint(CompetitionPigeonId id);
+    List<ResultResponseDto> calculatePoint(CompetitionResponseDto competition);
 }

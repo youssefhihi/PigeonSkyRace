@@ -29,6 +29,9 @@ public class SeasonPigeonDomainService implements SeasonPigeonService , SeasonPi
         ).ifPresent(existing -> {
             throw new FailedToRegister("This pigeon is already registered in the season.");
         });
+        if(!seasonPigeonRequestDto.season().getIsActive()){
+            throw new FailedToRegister("This pigeon is not active.");
+        }
 
         SeasonPigeon savedSeasonPigeon = repository.save(mapper.toEntity(seasonPigeonRequestDto));
 

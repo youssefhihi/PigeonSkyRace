@@ -15,12 +15,14 @@ import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionMapper;
 import static ma.yc.PigeonSkyRace.common.application.service.Helper.calculateDistance;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class CompetitionServiceImpl implements CompetitionService, CompetitionApplicationService {
 

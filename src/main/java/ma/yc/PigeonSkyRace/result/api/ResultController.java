@@ -59,9 +59,10 @@ public class ResultController {
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<ResultResponseDto>> getResult(@PathVariable String id){
-        List<ResultResponseDto> resultsResponseDto = resultService.calculatePoint(CompetitionPigeonId.fromString(id));
+    @GetMapping("/{competitionId}")
+    public ResponseEntity<List<ResultResponseDto>> getResult(@PathVariable String competitionId){
+        CompetitionResponseDto competitionResponseDto = competitionApplicationService.getCompetition(CompetitionId.fromString(competitionId));
+        List<ResultResponseDto> resultsResponseDto = resultService.calculatePoint(competitionResponseDto);
 
         return new ResponseEntity<>(resultsResponseDto, HttpStatus.CREATED);
     }
