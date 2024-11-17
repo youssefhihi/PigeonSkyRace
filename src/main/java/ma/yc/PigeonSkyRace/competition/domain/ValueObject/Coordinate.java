@@ -3,7 +3,9 @@ package ma.yc.PigeonSkyRace.competition.domain.ValueObject;
 
 import jakarta.validation.constraints.NotNull;
 
-public record Coordinate(@NotNull Double latitude, @NotNull Double longitude) {
+import java.io.Serializable;
+
+public record Coordinate(@NotNull Double latitude, @NotNull Double longitude) implements Serializable {
     public Coordinate {
         if (latitude < -90 || latitude > 90) {
             throw new IllegalArgumentException("Latitude must be between -90 and 90 degrees.");

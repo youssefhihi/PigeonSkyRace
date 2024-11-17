@@ -1,45 +1,67 @@
 package ma.yc.PigeonSkyRace.competition.domain.service.Impl;
 
+import lombok.RequiredArgsConstructor;
+import ma.yc.PigeonSkyRace.common.domain.exception.NotFoundException;
 import ma.yc.PigeonSkyRace.competition.application.dto.request.CompetitionRequestDto;
 import ma.yc.PigeonSkyRace.competition.application.dto.response.CompetitionResponseDto;
-import ma.yc.PigeonSkyRace.competition.domain.service.interfaces.CompetitionService;
-import ma.yc.PigeonSkyRace.competition.domain.repository.CompetitionRepository;
-import ma.yc.PigeonSkyRace.competition.infrastructure.mapping.CompetitionMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import ma.yc.PigeonSkyRace.competition.application.events.CompetitionCreatedEvent;
+import ma.yc.PigeonSkyRace.competition.application.service.CompetitionApplicationService;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.CompetitionId;
+import ma.yc.PigeonSkyRace.competition.domain.ValueObject.Coordinate;
+import ma.yc.PigeonSkyRace.competition.domain.entity.Competition;
+import ma.yc.PigeonSkyRace.competition.domain.service.CompetitionService;
+import ma.yc.PigeonSkyRace.competition.infrastructure.repository.CompetitionRepository;
+import ma.yc.PigeonSkyRace.competition.application.mapping.CompetitionMapper;
+import static ma.yc.PigeonSkyRace.common.application.service.Helper.calculateDistance;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class CompetitionServiceImpl implements CompetitionService {
+@Validated
+@RequiredArgsConstructor
+public class CompetitionServiceImpl implements CompetitionService, CompetitionApplicationService {
 
-    private final CompetitionRepository competitionRepository;
-    private final CompetitionMapper competitionMapper;
-
-
-    @Autowired
-    public CompetitionServiceImpl(CompetitionRepository competitionRepository, CompetitionMapper competitionMapper) {
-        this.competitionRepository = competitionRepository;
-        this.competitionMapper = competitionMapper;
-    }
+    private final CompetitionRepository repository;
+    private final CompetitionMapper mapper;
+    private final ApplicationEventPublisher eventPublisher;
 
 
     @Override
     public CompetitionResponseDto createCompetition(CompetitionRequestDto competitionRequestDto) {
-        return competitionMapper.toDto(competitionRepository.save(competitionMapper.toEntity(competitionRequestDto)));
+        Competition competition = mapper.toEntity(competitionRequestDto);
+        competition.setDistance(calculateDistance(competition.getCoordinate(),new Coordinate(32.2994,-9.2372)));
+        Competition savedCompetition = repository.save(competition);
+        eventPublisher.publishEvent(new CompetitionCreatedEvent(savedCompetition, competitionRequestDto.seasonId()));
+        return mapper.toDto(savedCompetition);
     }
 
     @Override
-    public CompetitionResponseDto updateCompetition(CompetitionRequestDto competitionRequestDto) {
-        return competitionMapper.toDto(competitionRepository.save(competitionMapper.toEntity(competitionRequestDto)));
+    public CompetitionResponseDto getCompetition(CompetitionId id){
+        Competition competition = repository.findById(id).orElseThrow(() -> new NotFoundException("Competition", id));
+        return mapper.toDto(competition);
     }
 
     @Override
-    public Boolean deleteCompetition(UUID id) {
-        if (competitionRepository.existsById(id)) {
-            competitionRepository.deleteById(id);
+    public List<CompetitionResponseDto> getAllCompetitions() {
+        List<Competition> competitions = repository.findAll();
+        return   competitions.stream().map(mapper::toDto).collect(Collectors.toList());
+
+    }
+
+
+    @Override
+    public Boolean updateCompetition(CompetitionId id, Coordinate coordinate) {
+        if(repository.existsById(id)){
+            repository.updateCoordinateById(id, coordinate);
             return true;
         }
-        return false;
+       throw new NotFoundException("Competition", id);
     }
+
+
 }
